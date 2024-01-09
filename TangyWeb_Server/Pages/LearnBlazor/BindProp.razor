@@ -3,12 +3,12 @@
 
 Name : @product.Name <br/>
 Active : @product.IsActive <br/>
+Price : @product.Price <br/> 
+This Product is : @(product.IsActive ? "Active" : "Not Active")  <br/> <br/>
 
-Price : @product.Price <br/> <br/>
 
-Price ( One way Data Binding ) : <input type="number"  value="@product.Price"/> <br/> <br/>
-@* Price ( Two way Data Binding ) : <input type="number"  @bind-value="@product.Price" @bind-value:event="oninput" /> *@
-Price ( Two way Data Binding ) : <input type="number"  @bind="@product.Price" @bind:event="oninput" />
+Active : <input type="checkbox" @bind="product.IsActive" checked="@(product.IsActive ? "checked" : null)" /> <br/> 
+Price : <input type="number"  @bind="@product.Price" @bind:event="oninput" />  <br/>
 
 
 
