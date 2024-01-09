@@ -25,6 +25,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Signal R Connection  
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
