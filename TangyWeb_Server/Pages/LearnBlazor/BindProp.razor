@@ -1,76 +1,115 @@
 @page "/learnBlazor/bindProp"
 
+<h2 class="text-success mb-4">Individual Product</h2>
 <div class="container">
     <div class="row">
-    <div class="col border border-primary-subtle p-3">
-        <h4 class="text-primary">Product Summary</h4>
-        <hr/>
-        Name : @product.Name <br/>
-        Active : @product.IsActive <br/>
-        Price : @product.Price <br/>
-        This Product is : @(product.IsActive ? "Active" : "Not Active") <br/>
-        @if (!string.IsNullOrWhiteSpace(selectedValue))
-        {
-            <p> Property Selected : @product.ProductProperties.FirstOrDefault(p => p.Key == selectedValue).Value </p>
-        }
-    </div>
-    <br/> <br/>
-
-
-    <div class="col border border-primary-subtle p-3">
-        <h4 class="text-primary">Product Playground</h4>
-        <hr/>
-        Active : <input type="checkbox" @bind="product.IsActive"/> <br/>
-        Price : <input type="number" @bind="@product.Price" @bind:event="oninput"/> <br/>
-        Product Properties :
-        <select @bind="selectedValue">
-            <option value="">Select...</option>
-            @foreach (var property in product.ProductProperties)
+        <div class="col border border-primary-subtle p-3">
+            <h4 class="text-primary">Product Summary</h4>
+            <hr/>
+            Name : @product.Name <br/>
+            Active : @product.IsActive <br/>
+            Price : @product.Price <br/>
+            This Product is : @(product.IsActive ? "Active" : "Not Active") <br/>
+            @if (!string.IsNullOrWhiteSpace(selectedValue))
             {
-                <option value="@property.Key">@property.Key</option>
+                <p> Property Selected : @product.ProductProperties.FirstOrDefault(p => p.Key == selectedValue).Value </p>
             }
-        </select>
-    </div>
-    </div>
+        </div>
+        <br/> <br/>
 
+
+        <div class="col border border-primary-subtle p-3">
+            <h4 class="text-primary">Product Playground</h4>
+            <hr/>
+            Active : <input type="checkbox" @bind="product.IsActive"/> <br/>
+            Price : <input type="number" @bind="@product.Price" @bind:event="oninput"/> <br/>
+            Product Properties :
+            <select @bind="selectedValue">
+                <option value="">Select...</option>
+                @foreach (var property in product.ProductProperties)
+                {
+                    <option value="@property.Key">@property.Key</option>
+                }
+            </select>
+        </div>
+    </div>
 </div>
 
+<h2 class="text-success my-4">Product Table</h2>
+<div class="container">
+    <table class="table  table-striped-columns">
+        <thead>
+        <tr>
+            <th scope="col">#</th><th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">IsActive</th>
+        </tr>
+        </thead>
+        @foreach (var product in Products)
+        {
+            <tbody>
+            <tr>
+                <th scope="row">@product.Id</th>
+                <td>
+                    <input type="text" @bind="@product.Name" @bind:event="oninput"/>
+                </td>
+                <td>
+                    <input type="number" @bind="@product.Price"/>
+                </td>
+                <td>
+                    <input type="checkbox" @bind="@product.IsActive"/>
+                </td>
+            </tr>
+            </tbody>
+        }
+    </table>
+</div>
+
+<h2 class="text-warning my-4">Product Summary</h2>
+
+<div class="container">
+    @foreach (var product in Products)
+    {
+        <p> The Product <span class="text-primary">@product.Name</span> with the Price of <span class="text-primary">@product.Price</span> 
+            is <span class="text-primary">@(product.IsActive ? "Active" : "InActive")</span> </p>
+    }
+</div>
 
 @code {
-    
+
     private string selectedValue = string.Empty;
-    
+
     Demo_Product product = new()
     {
-       Id = 1,
-       Name = "Rose Candle",
-       IsActive = true,
-       Price = 10.99,
-       ProductProperties = new List<Demo_ProductProp>()
-       {
-           new()
-           {
-               Id = 1,
-               Key = "Colors",
-               Value = "black"
-           },
-           new()
-           {
-               Id = 2,
-               Key = "Flavor",
-               Value = "Rose jasmine"
-           },
-           new()
-           {
-               Id = 3,
-               Key = "Size",
-               Value = "20oz"
-           }
-       }
+        Id = 1,
+        Name = "Rose Candle",
+        IsActive = true,
+        Price = 10.99,
+        ProductProperties = new List<Demo_ProductProp>()
+        {
+            new()
+            {
+                Id = 1,
+                Key = "Colors",
+                Value = "black"
+            },
+            new()
+            {
+                Id = 2,
+                Key = "Flavor",
+                Value = "Rose jasmine"
+            },
+            new()
+            {
+                Id = 3,
+                Key = "Size",
+                Value = "20oz"
+            }
+        }
     };
 
     List<Demo_Product> Products = new();
-    
+
     /* The OnInitialized method in Blazor is a lifecycle method
      that gets invoked when the component has received its initial parameters
      from its parent in the render tree but before the first render.
@@ -83,11 +122,12 @@
             Id = 1,
             Name = "Midnight Blaze",
             IsActive = false,
+            Price = 10.99,
             ProductProperties = new()
             {
-                new Demo_ProductProp { Id = 1, Key = "Flavor", Value = "Rose"},
-                new Demo_ProductProp { Id = 2, Key = "Size", Value = "20oz"},
-                new Demo_ProductProp { Id = 3, Key = "Color", Value="Purple" }
+                new Demo_ProductProp {Id = 1, Key = "Flavor", Value = "Rose"},
+                new Demo_ProductProp {Id = 2, Key = "Size", Value = "20oz"},
+                new Demo_ProductProp {Id = 3, Key = "Color", Value = "Purple"}
             }
         });
 
@@ -96,17 +136,18 @@
             Id = 2,
             Name = "Blossom Lily",
             IsActive = true,
+            Price = 13.99,
             ProductProperties = new()
             {
-                new Demo_ProductProp { Id = 1, Key = "Flavor", Value = "Lily" },
-                new Demo_ProductProp { Id = 2, Key = "Size", Value = "18oz" },
-                new Demo_ProductProp {Id = 3,Key = "Color",Value = "White"}
+                new Demo_ProductProp {Id = 1, Key = "Flavor", Value = "Lily"},
+                new Demo_ProductProp {Id = 2, Key = "Size", Value = "18oz"},
+                new Demo_ProductProp {Id = 3, Key = "Color", Value = "White"}
             }
         });
-        
+
         base.OnInitialized();
     }
-    
+
     /* In Blazor, the component lifecycle methods are:
          SetParametersAsync: Called when a component receives parameters from its parent component.
          OnInitialized: Called when a component has received its initial parameters but has not yet rendered.
@@ -116,5 +157,5 @@
          OnAfterRender: Called after a component has finished rendering.
          OnAfterRenderAsync: A variation of OnAfterRender that allows for asynchronous operations.
          ShouldRender: Called when Blazor wants to render the component. If this method returns false, rendering will be skipped.*/
-    
+
 }
