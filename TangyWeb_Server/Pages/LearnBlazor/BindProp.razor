@@ -1,32 +1,39 @@
 @page "/learnBlazor/bindProp"
-@using Tangy_Models.LearnBlazorModels
 
-<h3>Product</h3>
-
-Name : @product.Name <br/>
-Active : @product.IsActive <br/>
-Price : @product.Price <br/> 
-This Product is : @(product.IsActive ? "Active" : "Not Active")  <br/> 
-@if (!string.IsNullOrWhiteSpace(selectedValue))
-{
-    <p> Property Selected : @product.ProductProperties.FirstOrDefault(p => p.Key == selectedValue).Value </p>
-}
-<br/> <br/>
-
-
-
-Active : <input type="checkbox" @bind="product.IsActive" /> <br/> 
-Price : <input type="number"  @bind="@product.Price" @bind:event="oninput" />  <br/>
-Product Properties : 
-<select @bind="selectedValue">
-    <option value="">Select...</option>
-    @foreach (var property in product.ProductProperties)
-    {
-       <option value="@property.Key">@property.Key</option> 
-    }
-</select>
+<div class="container">
+    <div class="row">
+    <div class="col border border-primary-subtle p-3">
+        <h4 class="text-primary">Product Summary</h4>
+        <hr/>
+        Name : @product.Name <br/>
+        Active : @product.IsActive <br/>
+        Price : @product.Price <br/>
+        This Product is : @(product.IsActive ? "Active" : "Not Active") <br/>
+        @if (!string.IsNullOrWhiteSpace(selectedValue))
+        {
+            <p> Property Selected : @product.ProductProperties.FirstOrDefault(p => p.Key == selectedValue).Value </p>
+        }
+    </div>
+    <br/> <br/>
 
 
+    <div class="col border border-primary-subtle p-3">
+        <h4 class="text-primary">Product Playground</h4>
+        <hr/>
+        Active : <input type="checkbox" @bind="product.IsActive"/> <br/>
+        Price : <input type="number" @bind="@product.Price" @bind:event="oninput"/> <br/>
+        Product Properties :
+        <select @bind="selectedValue">
+            <option value="">Select...</option>
+            @foreach (var property in product.ProductProperties)
+            {
+                <option value="@property.Key">@property.Key</option>
+            }
+        </select>
+    </div>
+    </div>
+
+</div>
 
 
 @code {
