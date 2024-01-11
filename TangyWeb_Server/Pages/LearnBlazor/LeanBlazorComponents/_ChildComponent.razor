@@ -3,9 +3,11 @@
     <div class="alert alert-success">
         @if (ChildContent != null)
         {
-           @ChildContent
+            @ChildContent
         }
     </div>
+
+    <button type="button" class="btn btn-danger" @onclick="OnButtonClick">Button to be clicked</button>
 </div>
 
 @code {
@@ -13,5 +15,7 @@
     [Parameter] public string Tile { get; set; }
     
     [Parameter] public RenderFragment ChildContent { get; set; }
-
+    
+    [Parameter] public EventCallback OnButtonClick  {get; set; }
+    
 }

@@ -2,11 +2,29 @@
 
 <h2 class="mb-4">Parent Child Relation</h2>
 
-<_ChildComponent Tile="This Tile is passed as a parameter from the Parent component">
-    <p>This is some content being passed as a RenderFragment ChildContent. 
-        Add this where you want the ChildContent to display in the child component.</p>
+<_ChildComponent
+    Tile="This Tile is passed as a parameter from the Parent component"
+    OnButtonClick="ShowMessage">
+    <p>
+        This is some content being passed as a RenderFragment ChildContent.
+        Add this where you want the ChildContent to display in the child component.
+    </p>
 </_ChildComponent>
 
+@messageText
+
 @code {
+
+
+    private string messageText { get; set; }
+
+    #region Methods
+
+    private void ShowMessage()
+    {
+        messageText = "Tangy Button clicked from Child Component";
+    }
+
+    #endregion
 
 }
