@@ -1,0 +1,17 @@
+<div class="bg-light px-2 py-4">
+    <div class="alert alert-info">@Tile</div>
+    <div class="alert alert-success">
+        @if (ChildContent != null)
+        {
+           @ChildContent
+        }
+    </div>
+</div>
+
+@code {
+
+    [Parameter] public string Tile { get; set; }
+    
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+}
