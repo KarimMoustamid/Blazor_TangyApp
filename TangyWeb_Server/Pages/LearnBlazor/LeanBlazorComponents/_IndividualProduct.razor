@@ -1,4 +1,5 @@
-<div class="col border d-flex flex-column">
+
+<div class="col border d-flex flex-column" @onclick="arg => IsSelected(arg , product.Name)" >
     <div class="">
         <h4 class="text-secondary">Product - @product.Id</h4>
         <span>Add to Favorite</span> <input type="checkbox" @onchange="FavoriteUpdated"/>
@@ -21,6 +22,8 @@
     [Parameter] public Demo_Product product { get; set; }
 
     [Parameter] public EventCallback<bool> OnFavoriteCountUpdated { get; set; }
+    
+    [Parameter] public EventCallback<string> OnLastSelectedProductUpdated { get; set; }
 
     #region Methods
 
@@ -28,6 +31,12 @@
     {
         // Invoke the parent method (FavoriteCountUpdate) 
         await OnFavoriteCountUpdated.InvokeAsync((bool) e.Value);
+    }
+
+    private async Task IsSelected(MouseEventArgs e, string productName)
+    {
+        // Create and EventCallback to send the product name to the parent 
+        OnLastSelectedProductUpdated.InvokeAsync(productName);
     }
 
     #endregion

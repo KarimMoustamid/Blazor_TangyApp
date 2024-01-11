@@ -2,12 +2,17 @@
 
 <h2 class="text-success my-4">DemoProduct</h2>
 <p class="text-danger">Favourites Total : @selectedFavoriteCount</p>
+<p class="text-primary">Last Selected Product : <span class="text-black">@lastSelectedProductName </span></p>
 
 <div class="container bg-light">
     <div class="row">
         @foreach (var product in Products)
         {
-            <_IndividualProduct product="product" OnFavoriteCountUpdated="FavoriteCountUpdated" ></_IndividualProduct>
+            <_IndividualProduct 
+                product="product" 
+                OnFavoriteCountUpdated="FavoriteCountUpdated"
+                OnLastSelectedProductUpdated="LastSelectedProductUpdated"
+                ></_IndividualProduct>
         }
     </div>
 </div>
@@ -15,6 +20,7 @@
 @code {
 
     private int selectedFavoriteCount { get; set; } = 0;
+    private string lastSelectedProductName { get; set; } = string.Empty;
     
     List<Demo_Product> Products = new();
 
@@ -64,7 +70,13 @@
             selectedFavoriteCount--;
         }
     }
-    
+
+    protected void LastSelectedProductUpdated(string productName)
+    {
+        // Logic if the event is triggered 
+        lastSelectedProductName = productName;
+    }
 
     #endregion
+    
 }
