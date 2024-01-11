@@ -1,31 +1,21 @@
 @page  "/learnBlazor/demoProduct"
 
 <h2 class="text-success my-4">DemoProduct</h2>
+<p class="text-danger">Favourites Total : @selectedFavoriteCount</p>
 
 <div class="container bg-light">
     <div class="row">
         @foreach (var product in Products)
         {
-            <div class="col border d-flex flex-column">
-                <div class="">
-                    <p>Name : <span class="text-primary">@product.Name</span></p>
-                    <p class="d-inline"> Show Properties : </p> <input type="checkbox" @bind="@product.IsActive"/>
-                    @if (product.IsActive)
-                    {
-                        foreach (var prop in product.ProductProperties)
-                        {
-                            <p> @prop.Key - @prop.Value</p>
-                        }
-                    }
-                </div>
-                <_EditDeleteBtn></_EditDeleteBtn>
-            </div>
+            <_IndividualProduct product="product" OnFavoriteCountUpdated="FavoriteCountUpdated" ></_IndividualProduct>
         }
     </div>
 </div>
 
 @code {
 
+    private int selectedFavoriteCount { get; set; } = 0;
+    
     List<Demo_Product> Products = new();
 
     protected override void OnInitialized()
@@ -61,4 +51,20 @@
         base.OnInitialized();
     }
 
+    #region Methods
+
+    protected void FavoriteCountUpdated(bool isSelected)
+    {
+        if (isSelected)
+        {
+            selectedFavoriteCount++;
+        }
+        else
+        {
+            selectedFavoriteCount--;
+        }
+    }
+    
+
+    #endregion
 }

@@ -1,0 +1,35 @@
+<div class="col border d-flex flex-column">
+    <div class="">
+        <h4 class="text-secondary">Product - @product.Id</h4>
+        <span>Add to Favorite</span> <input type="checkbox" @onchange="FavoriteUpdated"/>
+        <br/> <br/>
+        <p>Name : <span class="text-primary">@product.Name</span></p>
+        <p class="d-inline"> Show Properties : </p> <input type="checkbox" @bind="@product.IsActive"/>
+        @if (product.IsActive)
+        {
+            foreach (var prop in product.ProductProperties)
+            {
+                <p> @prop.Key - @prop.Value</p>
+            }
+        }
+    </div>
+    <_EditDeleteBtn IsActive="@product.IsActive"></_EditDeleteBtn >
+</div>
+
+@code {
+
+    [Parameter] public Demo_Product product { get; set; }
+
+    [Parameter] public EventCallback<bool> OnFavoriteCountUpdated { get; set; }
+
+    #region Methods
+
+    private async Task FavoriteUpdated(ChangeEventArgs e)
+    {
+        // Invoke the parent method (FavoriteCountUpdate) 
+        await OnFavoriteCountUpdated.InvokeAsync((bool) e.Value);
+    }
+
+    #endregion
+
+}

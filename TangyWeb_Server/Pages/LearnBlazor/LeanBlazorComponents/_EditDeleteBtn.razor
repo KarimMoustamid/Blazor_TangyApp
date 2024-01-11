@@ -1,8 +1,14 @@
-<div class="d-flex gap-2">
-<button type="button" class="btn btn-danger">Delete</button>
-<button type="button" class="btn btn-success">Edit</button>
-</div>
+@if (IsActive)
+{
+    <div class="d-flex gap-2">
+        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-success">Edit</button>
+    </div>
+}
 
 @code {
+
+    [Parameter]
+    public bool IsActive { get; set; }
 
 }
