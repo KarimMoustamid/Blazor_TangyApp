@@ -34,12 +34,12 @@
     
     private async Task ToastrSuccess()
     {
-         await _JsRuntime.InvokeVoidAsync("ShowToaster", "success" , "Success" );
+         await _JsRuntime.InvokeVoidAsync("toastrFunctions.showToastr", "success" , "Success" );
     }
     
     private async Task ToastrFailer()
     {
-         await _JsRuntime.InvokeVoidAsync("ShowToaster", "error" , "error");
+         await _JsRuntime.InvokeVoidAsync("toastrFunctions.showToastr", "error" , "error");
     }
 
     
