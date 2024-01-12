@@ -1,0 +1,15 @@
+<div>
+    <h4 class="text-primary pt-3">Another child Component</h4>
+    <input type="text" id="name" @attributes="InputAttributes">
+</div>
+
+@code {
+
+    [Parameter] public Dictionary<string, object> InputAttributes { get; set; } = new()
+    {
+        {"required", "required"},
+        {"Placeholder", "enter Your Name"},
+        {"maxlength", 5}
+    };
+
+}

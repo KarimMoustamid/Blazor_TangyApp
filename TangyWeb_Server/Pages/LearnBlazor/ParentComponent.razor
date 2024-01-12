@@ -5,18 +5,30 @@
 <_ChildComponent
     Tile="This Tile is passed as a parameter from the Parent component"
     OnButtonClick="ShowMessage">
-    <p>
-        This is some content being passed as a RenderFragment ChildContent.
-        Add this where you want the ChildContent to display in the child component.
-    </p>
+    <ChildContent>
+        <p>
+            This is some content being passed as a RenderFragment ChildContent.
+            Add this where you want the ChildContent to display in the child component.
+        </p>
+    </ChildContent>
 </_ChildComponent>
 
 @messageText
+
+<_AnotherChildComponent InputAttributes="InputAttributesFromParent">
+</_AnotherChildComponent>
 
 @code {
 
 
     private string messageText { get; set; }
+    
+    [Parameter] public Dictionary<string, object> InputAttributesFromParent { get; set; } = new()
+    {
+        {"required", "required"},
+        {"Placeholder", "Parent Placeholder"},
+        {"maxlength", 10}
+    };
 
     #region Methods
 
