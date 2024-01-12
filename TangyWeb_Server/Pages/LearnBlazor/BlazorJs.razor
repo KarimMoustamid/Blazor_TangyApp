@@ -23,7 +23,9 @@
 
 @code {
 
-    private string ConfirmMessage = "Are you sure you want to click the confirm button ?";
+    private string ConfirmMessage = "Are you sure you want to conform this ?";
+    private string ConfirmSusseccMessage = "Conformed";
+    private string ConfirmErrorMessage = "This is a dangers Error !";
     
     private bool ConfirmResult {get; set; }
     
@@ -34,12 +36,12 @@
     
     private async Task ToastrSuccess()
     {
-         await _JsRuntime.InvokeVoidAsync("toastrFunctions.showToastr", "success" , "Success" );
+         await _JsRuntime.ToastrSuccess(ConfirmSusseccMessage);
     }
     
     private async Task ToastrFailer()
     {
-         await _JsRuntime.InvokeVoidAsync("toastrFunctions.showToastr", "error" , "error");
+         await _JsRuntime.ToastrError(ConfirmErrorMessage);
     }
 
     
