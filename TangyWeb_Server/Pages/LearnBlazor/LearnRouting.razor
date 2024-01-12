@@ -1,0 +1,14 @@
+@page "/learnBlazor/LearnRouting/{Id}"
+@page "/learnBlazor/LearnRouting/{Id}/{parameter}"
+@page "/learnBlazor/LearnRouting"
+
+
+<h3>Learn Routing</h3>
+<p>@($"Your route Id are : {Id}")</p>
+<p>@($"Your route parameters are : {parameter}")</p>
+
+@code {
+   [Parameter] public string? Id { get; set; }
+   
+   [Parameter] public string? parameter { get; set; }
+}

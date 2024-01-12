@@ -1,11 +1,11 @@
 <div>
     <h4 class="text-primary pt-3">Another child Component</h4>
-    <input type="text" id="name" @attributes="InputAttributes">
+    <input type="text" id="name"  placeholder="Child Placeholder" @attributes="InputAttributes">
 </div>
 
 @code {
 
-    [Parameter] public Dictionary<string, object> InputAttributes { get; set; } = new()
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> InputAttributes { get; set; } = new()
     {
         {"required", "required"},
         {"Placeholder", "enter Your Name"},
