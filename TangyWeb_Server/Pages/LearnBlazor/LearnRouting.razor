@@ -5,12 +5,13 @@
 @inject NavigationManager _NavigationManager
 
 
-<h3 class="my-2">Learn Routing</h3>
+<h3 class="my-2" style="color:#a855f7">Learn Routing</h3>
 
 <p>Id : @param1</p>
 <p>Parameter : @param2</p>
 
-<a href="/learnBlazor/LearnRouting?Id=01&Parameter=Tangy" class="btn btn-primary">Navigate to query parameters</a>
+@* <NavLink href="/learnBlazor/LearnRouting?Id=01&Parameter=Tangy" class="btn btn-primary">Navigate to query parameters</NavLink> *@
+<button @onclick="NavigateToQueryParameters" class="btn btn-primary">Navigate to query parameters</button>
 <button
     class="btn btn-success"
     @onclick="loadParameters">
@@ -40,4 +41,9 @@
         param2 = queryParam["Parameter"];
     }
 
+    private void NavigateToQueryParameters()
+    {
+         _NavigationManager.NavigateTo("/learnBlazor/LearnRouting?Id=01&Parameter=Tangy"); 
+    }
+    
 }
