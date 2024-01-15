@@ -1,3 +1,5 @@
+@inject IJSRuntime _JsRuntime
+
 <div class="bg-light px-2 py-4">
     <div class="alert alert-info">@Tile</div>
     <div class="alert alert-success">
@@ -19,5 +21,13 @@
     [Parameter] public RenderFragment ChildContent { get; set; }
     
     [Parameter] public EventCallback OnButtonClick  {get; set; }
+    
+    
+    private string ConfirmSusseccMessage = "Operation Successful";
+    
+    public async Task ToastrSuccess()
+    {
+        await _JsRuntime.ToastrSuccess(ConfirmSusseccMessage);
+    }
     
 }
