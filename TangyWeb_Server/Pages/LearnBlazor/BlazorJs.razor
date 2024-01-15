@@ -5,10 +5,17 @@
 
 <button class="btn" style="background-color:#8b5cf6;color:#fff" @onclick="TestConfirmBox">Test confirm Button</button>
 
-<button class="btn btn-success" @onclick="ToastrSuccess">Test confirm Button</button>
-<button class="btn btn-danger" @onclick="ToastrFailer">Test confirm Button</button>
+<div class="my-4 d-flex gap-4">
+    <button class="btn btn-success " style="width:200px" @onclick="ToastrSuccess">Toastr success</button>
+    <button class="btn btn-danger" style="width:200px" @onclick="ToastrFailer">Toastr Failure</button>
+</div>
 
-<div class="container mt-5 text-center">
+<div class="my-4 d-flex gap-4">
+    <button class="btn btn-success" style="width:200px" @onclick="ShowAlertSuccessAsync">SweetAlert Success</button>
+    <button class="btn btn-danger" style="width:200px" @onclick="ShowAlertFailureAsync">SweetAlert Failure</button>
+</div>
+
+<div class="container mt-5 text-center bg-light py-5">
     <div class="row">
         @if (ConfirmResult)
         {
@@ -26,23 +33,32 @@
     private string ConfirmMessage = "Are you sure you want to conform this ?";
     private string ConfirmSusseccMessage = "Conformed";
     private string ConfirmErrorMessage = "This is a dangers Error !";
-    
-    private bool ConfirmResult {get; set; }
-    
+
+    private bool ConfirmResult { get; set; }
+
     private async Task TestConfirmBox()
     {
         ConfirmResult = await _JsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
     }
-    
+
     private async Task ToastrSuccess()
     {
-         await _JsRuntime.ToastrSuccess(ConfirmSusseccMessage);
-    }
-    
-    private async Task ToastrFailer()
-    {
-         await _JsRuntime.ToastrError(ConfirmErrorMessage);
+        await _JsRuntime.ToastrSuccess(ConfirmSusseccMessage);
     }
 
+    private async Task ToastrFailer()
+    {
+        await _JsRuntime.ToastrError(ConfirmErrorMessage);
+    }
+
+    private async Task ShowAlertSuccessAsync()
+    {
+        await _JsRuntime.SweetAlertSuccess("Your action was successful!");
+    }
     
+    private async Task ShowAlertFailureAsync()
+    {
+        await _JsRuntime.SweetAlertFailure("Your action was a Failure!");
+    }
+
 }
