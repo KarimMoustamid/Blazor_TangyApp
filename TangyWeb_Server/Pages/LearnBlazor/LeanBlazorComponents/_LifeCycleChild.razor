@@ -1,0 +1,45 @@
+<h3 class="text-success">_LifeCycleChild</h3>
+
+
+<span>CountValue :</span>   @CountValue
+
+@foreach (var item in EventType)
+{
+    <hr/>
+    @item
+}
+
+@code {
+    
+    private int currentCount;
+    List<string> EventType = new();
+    
+    [Parameter] public int CountValue { get; set; }
+    
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    #region Lifecycle
+
+    protected override void OnInitialized()
+    {
+        EventType.Add("Child - OnInitialized is called");
+    }
+    
+    protected override void OnParametersSet()
+    {
+        // parameter setting logic
+        EventType.Add("Child- OnParametersSet is called");
+    }
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        // async parameter setting logic
+        EventType.Add("Child- OnParametersSetAsync is called");
+    }
+
+    #endregion
+
+}
