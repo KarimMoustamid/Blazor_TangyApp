@@ -8,8 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+try
+{
+    builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+catch (Exception ex)
+{
+    var logger = LoggerFactory.Create(builder => { builder.AddConsole(); }).CreateLogger<Program>();
+
+    logger.LogError(ex, "DbContext Exception while initializing ApplicationDbContext.");
+}
 
 var app = builder.Build();
 
@@ -26,7 +35,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-// karim made a change here 
 // Signal R Connection  
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
