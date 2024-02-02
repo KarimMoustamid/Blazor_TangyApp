@@ -2,10 +2,15 @@
 
 <h3>LifeCycle</h3>
 
-<p role="status">Current count: @currentCount</p>
 
-<button class="btn btn-primary mb-4" @onclick="IncrementCount">Click me</button>
-@Count <button class="btn btn-primary" type="reset" @onclick="StartCountDown">Start CountDown</button>
+<div class="my-4 bg-light p-4 w-25">
+    <p role="status">Current count: @currentCount</p>
+    <button class="btn btn-primary mb-2" @onclick="IncrementCount">Click me</button>
+</div>
+
+<div class="my-4 bg-light p-4 w-25">
+<p>Count : @Count </p><button class="btn btn-primary" type="reset" @onclick="StartCountDown">Start CountDown</button>
+</div>
 
 <div class="border p-4 m-2">
     <_LifeCycleChild CountValue="@currentCount"></_LifeCycleChild>
